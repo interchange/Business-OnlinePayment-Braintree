@@ -1,0 +1,84 @@
+NAME
+    Business::OnlinePayment::Braintree - Online payment processing through
+    Briantree
+
+VERSION
+    Version 0.0001
+
+SYNOPSIS
+        use Business::OnlinePayment;
+
+        $tx = new Business::OnlinePayment('Braintree');
+
+        $tx->test_transaction(1); # sandbox transaction for development and tests
+  
+        $tx->content(merchant_id => 'your merchant id',
+                     public_key => 'your public key',
+                     private_key => 'your private key',
+                     amount => 100,
+                     card_number => '4111 1111 1111 1111',
+                     expiration => '1212');
+
+        $tx->submit();
+
+        if ($tx->is_success) {
+            print "Card processed successfully: " . $tx->authorization . "\n";
+        } else {
+            print "Card was rejected: " . $tx->error_message . "\n";
+        }
+
+DESCRIPTION
+    Online payment processing through Braintree based on Net::Braintree.
+
+NOTES
+    This is a very basic implementation right now and only for development
+    purposes. It is supposed to cover the complete Braintree Perl API
+    finally.
+
+METHODS
+  submit
+    Submits transaction to Braintree gateway.
+
+AUTHOR
+    Stefan Hornburg (Racke), `<racke at linuxia.de>'
+
+BUGS
+    Please report any bugs or feature requests to
+    `bug-business-onlinepayment-braintree at rt.cpan.org', or through the
+    web interface at
+    http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Business-OnlinePayment-Br
+    aintree. I will be notified, and then you'll automatically be notified
+    of progress on your bug as I make changes.
+
+    You can find documentation for this module with the perldoc command.
+
+        perldoc Business::OnlinePayment::Braintree
+
+    You can also look for information at:
+
+    * RT: CPAN's request tracker (report bugs here)
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Business-OnlinePayment-Brai
+        ntree
+
+    * AnnoCPAN: Annotated CPAN documentation
+        http://annocpan.org/dist/Business-OnlinePayment-Braintree
+
+    * CPAN Ratings
+        http://cpanratings.perl.org/d/Business-OnlinePayment-Braintree
+
+    * Search CPAN
+        http://search.cpan.org/dist/Business-OnlinePayment-Braintree/
+
+ACKNOWLEDGEMENTS
+LICENSE AND COPYRIGHT
+    Copyright 2011 Stefan Hornburg (Racke).
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of either: the GNU General Public License as published
+    by the Free Software Foundation; or the Artistic License.
+
+    See http://dev.perl.org/licenses/ for more information.
+
+SEE ALSO
+    Net::Braintree
+
