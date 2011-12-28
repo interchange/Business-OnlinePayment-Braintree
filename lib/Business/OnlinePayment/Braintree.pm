@@ -15,11 +15,11 @@ Business::OnlinePayment::Braintree - Online payment processing through Briantree
 
 =head1 VERSION
 
-Version 0.0001
+Version 0.0002
 
 =cut
 
-our $VERSION = '0.0001';
+our $VERSION = '0.0002';
 
 =head1 SYNOPSIS
 
