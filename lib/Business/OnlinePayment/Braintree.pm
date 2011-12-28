@@ -98,6 +98,12 @@ sub submit {
     }
 }
 
+=head2 set_defaults
+
+Sets defaults for the Braintree merchant id, public and private key.
+
+=cut
+    
 sub set_defaults {
     my ($self, %opts) = @_;
     my $config = Net::Braintree->configuration;
