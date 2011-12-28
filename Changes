@@ -1,5 +1,11 @@
 Revision history for Business::OnlinePayment::Braintree
 
+0.0002  Wed Dec 28 21:32:42 2011 CET
+
+    [BUG FIXES]
+
+    * Move extra parameters (merchant_id, private_key, public_key) to constructor (#71257).
+
 0.0001  Tue Sep 13 14:06:34 2011 CEST
 
     * Initial release
