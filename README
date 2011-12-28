@@ -40,6 +40,9 @@ METHODS
   submit
     Submits transaction to Braintree gateway.
 
+  set_defaults
+    Sets defaults for the Braintree merchant id, public and private key.
+
 AUTHOR
     Stefan Hornburg (Racke), `<racke at linuxia.de>'
 
