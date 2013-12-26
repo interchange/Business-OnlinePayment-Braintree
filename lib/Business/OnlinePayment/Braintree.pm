@@ -11,7 +11,7 @@ use base 'Business::OnlinePayment';
 
 =head1 NAME
 
-Business::OnlinePayment::Braintree - Online payment processing through Briantree
+Business::OnlinePayment::Braintree - Online payment processing through Braintree
 
 =head1 VERSION
 
