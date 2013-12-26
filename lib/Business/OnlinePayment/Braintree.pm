@@ -198,6 +198,19 @@ L<http://search.cpan.org/dist/Business-OnlinePayment-Braintree/>
 
 =head1 ACKNOWLEDGEMENTS
 
+Grant for the following enhancements (RT #88525):
+
+=over 4
+
+=item billing address transmission
+
+=item order number transmission
+
+=item refund ability
+
+=item added submit_for_settlement to complete the "sale" action
+
+=back
 
 =head1 LICENSE AND COPYRIGHT
 
