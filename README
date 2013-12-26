@@ -1,9 +1,9 @@
 NAME
     Business::OnlinePayment::Braintree - Online payment processing through
-    Briantree
+    Braintree
 
 VERSION
-    Version 0.0002
+    Version 0.003
 
 SYNOPSIS
         use Business::OnlinePayment;
@@ -40,6 +40,10 @@ METHODS
   submit
     Submits transaction to Braintree gateway.
 
+  sale $submit
+    Performs sale transaction with Braintree. Used both for settlement
+    ($submit is a true value) and authorization ($submit is a false value).
+
   set_defaults
     Sets defaults for the Braintree merchant id, public and private key.
 
@@ -74,8 +78,15 @@ BUGS
         http://search.cpan.org/dist/Business-OnlinePayment-Braintree/
 
 ACKNOWLEDGEMENTS
+    Grant for the following enhancements (RT #88525):
+
+    billing address transmission
+    order number transmission
+    refund ability
+    added submit_for_settlement to complete the "sale" action
+
 LICENSE AND COPYRIGHT
-    Copyright 2011 Stefan Hornburg (Racke).
+    Copyright 2011-2013 Stefan Hornburg (Racke).
 
     This program is free software; you can redistribute it and/or modify it
     under the terms of either: the GNU General Public License as published
