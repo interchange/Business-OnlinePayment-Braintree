@@ -66,7 +66,7 @@ sub submit {
     my $self = shift;
     my $config = Net::Braintree->configuration;
     my %content = $self->content;
-    my $result;
+    my ($action, $result);
 
     # sandbox vs production
     if ($self->test_transaction) {
@@ -76,18 +76,52 @@ sub submit {
 	$config->environment('production');
     }
 
-    # adjust format of expiration date
-    $content{expiration} = substr($content{expiration}, 0, 2)
-	. '/'. substr($content{expiration}, 2);
-
     # transaction
-    if ( lc( $content{action} ) eq 'normal authorization' ) {
-        $result = Net::Braintree::Transaction->sale({
+    $action = lc($content{action});
+
+    if ($action eq 'normal authorization' ) {
+        $result = $self->sale(1);
+    }
+    elsif ($action eq 'authorization only') {
+        $result = $self->sale(0);
+    }
+    elsif ($action eq 'credit' ) {
+        $result = Net::Braintree::Transaction->refund($content{order_number}, $content{amount});
+    }
+    else {
+        $self->error_message( "unsupported action for Braintree: $content{action}" );
+        return 0;
+    }
+
+    if ($result->is_success()) {
+	$self->is_success(1);
+	$self->authorization($result->transaction->id);
+    }
+    else {
+	$self->is_success(0);
+	$self->error_message($result->message);
+    }
+}
+
+=head2 sale $submit
+
+Performs sale transaction with Braintree. Used both
+for settlement ($submit is a true value) and
+authorization ($submit is a false value).
+
+=cut
+
+sub sale {
+    my ($self, $submit) = @_;
+    my %content = $self->content;
+
+    my $result = Net::Braintree::Transaction->sale({
             amount => $content{amount},
             order_id => $content{invoice_number},
             credit_card => {
                 number => $content{card_number},
-                expiration_date => $content{expiration},
+                expiration_month => substr($content{expiration},0,2),
+                expiration_year => substr($content{expiration},2,2),
             },
             billing => {
                 first_name => $content{first_name},
@@ -100,26 +134,11 @@ sub submit {
                 country_code_alpha2 => $content{country}
             },
             options => {
-	        submit_for_settlement => 1
+	            submit_for_settlement => $submit,
             }
         });
-    }
-    elsif ( lc( $content{action} ) eq 'credit' ) {
-        $result = Net::Braintree::Transaction->refund($content{order_number}, $content{amount});
-    }
-    else {
-        $self->error_message( "unsupported action: $content{action}" );
-        return 0;
-    }
 
-    if ($result->is_success()) {
-	$self->is_success(1);
-	$self->authorization($result->transaction->id);
-    }
-    else {
-	$self->is_success(0);
-	$self->error_message($result->message);
-    }
+    return $result;
 }
 
 =head2 set_defaults
