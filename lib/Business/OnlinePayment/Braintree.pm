@@ -81,12 +81,36 @@ sub submit {
 	. '/'. substr($content{expiration}, 2);
 
     # transaction
-    $result = Net::Braintree::Transaction->sale({
-	amount => $content{amount},
-	credit_card => {
-	    number => $content{card_number},
-	    expiration_date => $content{expiration},
-	}});
+    if ( lc( $content{action} ) eq 'normal authorization' ) {
+        $result = Net::Braintree::Transaction->sale({
+            amount => $content{amount},
+            order_id => $content{invoice_number},
+            credit_card => {
+                number => $content{card_number},
+                expiration_date => $content{expiration},
+            },
+            billing => {
+                first_name => $content{first_name},
+                last_name => $content{last_name},
+                company => $content{company},
+                street_address => $content{address},
+                locality => $content{city},
+                region => $content{state},
+                postal_code => $content{zip},
+                country_code_alpha2 => $content{country}
+            },
+            options => {
+	        submit_for_settlement => 1
+            }
+        });
+    }
+    elsif ( lc( $content{action} ) eq 'credit' ) {
+        $result = Net::Braintree::Transaction->refund($content{order_number}, $content{amount});
+    }
+    else {
+        $self->error_message( "unsupported action: $content{action}" );
+        return 0;
+    }
 
     if ($result->is_success()) {
 	$self->is_success(1);
