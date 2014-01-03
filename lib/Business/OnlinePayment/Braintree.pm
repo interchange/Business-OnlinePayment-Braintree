@@ -94,8 +94,9 @@ sub submit {
     }
 
     if ($result->is_success()) {
-	$self->is_success(1);
-	$self->authorization($result->transaction->id);
+        $self->is_success(1);
+        $self->authorization($result->transaction->id);
+        $self->order_number($result->transaction->id);
     }
     else {
 	$self->is_success(0);
