@@ -116,6 +116,9 @@ sub sale {
     my ($self, $submit) = @_;
     my %content = $self->content;
 
+    # get rid of slash inside expiration value
+    $content{expiration} =~ s%/%%;
+
     my $result = Net::Braintree::Transaction->sale({
             amount => $content{amount},
             order_id => $content{invoice_number},
