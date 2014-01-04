@@ -49,6 +49,9 @@ our $VERSION = '0.003';
 
 Online payment processing through Braintree based on L<Net::Braintree>.
 
+The documentation for L<Net::Braintree> is located at
+L<https://www.braintreepayments.com/docs/perl>.
+
 =head1 NOTES
 
 This is a very basic implementation right now and only for development purposes.
