@@ -119,7 +119,7 @@ sub sale {
     # get rid of slash inside expiration value
     $content{expiration} =~ s%/%%;
 
-    my $result = Net::Braintree::Transaction->sale({
+    my %args = (
             amount => $content{amount},
             order_id => $content{invoice_number},
             credit_card => {
@@ -140,7 +140,14 @@ sub sale {
             options => {
 	            submit_for_settlement => $submit,
             }
-        });
+        );
+
+    if (exists $content{merchant_account_id}
+        && $content{merchant_account_id}) {
+        $args{merchant_account_id} = $content{merchant_account_id};
+    }
+
+    my $result = Net::Braintree::Transaction->sale(\%args);
 
     return $result;
 }
