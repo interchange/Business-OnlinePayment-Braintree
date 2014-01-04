@@ -54,8 +54,7 @@ L<https://www.braintreepayments.com/docs/perl>.
 
 =head1 NOTES
 
-This is a very basic implementation right now and only for development purposes.
-It is supposed to cover the complete Braintree Perl API finally.
+This is supposed to cover the complete Braintree Perl API finally.
 
 =head1 METHODS
 
@@ -191,9 +190,9 @@ You can also look for information at:
 
 =over 4
 
-=item * RT: CPAN's request tracker (report bugs here)
+=item * Github issues (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Business-OnlinePayment-Braintree>
+L<https://github.com/interchange/Business-OnlinePayment-Braintree/issues>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
@@ -228,7 +227,7 @@ Grant for the following enhancements (RT #88525):
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2011-2013 Stefan Hornburg (Racke).
+Copyright 2011-2014 Stefan Hornburg (Racke).
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
