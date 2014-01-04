@@ -3,7 +3,7 @@ NAME
     Braintree
 
 VERSION
-    Version 0.003
+    Version 0.004
 
 SYNOPSIS
         use Business::OnlinePayment;
@@ -31,10 +31,11 @@ SYNOPSIS
 DESCRIPTION
     Online payment processing through Braintree based on Net::Braintree.
 
+    The documentation for Net::Braintree is located at
+    https://www.braintreepayments.com/docs/perl.
+
 NOTES
-    This is a very basic implementation right now and only for development
-    purposes. It is supposed to cover the complete Braintree Perl API
-    finally.
+    This is supposed to cover the complete Braintree Perl API finally.
 
 METHODS
   submit
@@ -64,9 +65,9 @@ BUGS
 
     You can also look for information at:
 
-    * RT: CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Business-OnlinePayment-Brai
-        ntree
+    * Github issues (report bugs here)
+        https://github.com/interchange/Business-OnlinePayment-Braintree/issu
+        es
 
     * AnnoCPAN: Annotated CPAN documentation
         http://annocpan.org/dist/Business-OnlinePayment-Braintree
@@ -86,7 +87,7 @@ ACKNOWLEDGEMENTS
     added submit_for_settlement to complete the "sale" action
 
 LICENSE AND COPYRIGHT
-    Copyright 2011-2013 Stefan Hornburg (Racke).
+    Copyright 2011-2014 Stefan Hornburg (Racke).
 
     This program is free software; you can redistribute it and/or modify it
     under the terms of either: the GNU General Public License as published

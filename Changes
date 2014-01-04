@@ -1,5 +1,19 @@
 Revision history for Business::OnlinePayment::Braintree
 
+0.004 Sat Jan  4 12:56:48 2014 CET
+
+    [ENHANCEMENTS]
+
+    * Pass merchant_account_id through to Braintree (GH #1).
+    * Get rid of slash inside expiration value (GH #1).
+    * Set authorization and order number value after successful payment
+      action (GH #1).
+
+    [DOCUMENTATION]
+
+    * Add note about location of Net::Braintree documentation.
+    * Adjust notes, copyright year and bugtracker URL.
+
 0.003 Thu Dec 26 19:15:09 2013 CET
 
     [ENHANCEMENTS]
