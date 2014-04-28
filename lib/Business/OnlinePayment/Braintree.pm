@@ -95,13 +95,38 @@ sub submit {
         return 0;
     }
 
+    $self->cvv2_response($result->transaction->cvv_response_code);
+    $self->order_number($result->transaction->id);
+
+    my $result_code = $result->transaction->processor_response_code;
+
+    my %result_codes = (
+        2000 => 'declined',
+        2001 => 'nsf',
+        2002 => 'nsf',
+        2003 => 'nsf',
+        2010 => 'declined',
+        2012 => 'declined',
+        2013 => 'declined',
+        2014 => 'declined',
+        2022 => 'declined',
+        2038 => 'declined',
+        2041 => 'declined',
+        2044 => 'declined',
+        2046 => 'declined',
+        2047 => 'pickup',
+        2053 => 'stolen',
+    );
+
+    $self->result_code($result_code);
+
     if ($result->is_success()) {
         $self->is_success(1);
         $self->authorization($result->transaction->id);
-        $self->order_number($result->transaction->id);
     }
     else {
 	$self->is_success(0);
+    $self->failure_status($result_codes{$result_code}) if $result_codes{$result_code};
 	$self->error_message($result->message);
     }
 }
@@ -128,6 +153,7 @@ sub sale {
                 number => $content{card_number},
                 expiration_month => substr($content{expiration},0,2),
                 expiration_year => substr($content{expiration},2,2),
+                cvv => $content{cvv},
             },
             billing => {
                 first_name => $content{first_name},
