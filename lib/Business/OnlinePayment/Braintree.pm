@@ -68,7 +68,7 @@ sub submit {
     my $self = shift;
     my $config = Net::Braintree->configuration;
     my %content = $self->content;
-    my ($action, $result);
+    my ($action, $result, $transaction, $result_code);
 
     # sandbox vs production
     if ($self->test_transaction) {
@@ -95,11 +95,6 @@ sub submit {
         return 0;
     }
 
-    $self->cvv2_response($result->transaction->cvv_response_code);
-    $self->order_number($result->transaction->id);
-
-    my $result_code = $result->transaction->processor_response_code;
-
     my %result_codes = (
         2000 => 'declined',
         2001 => 'nsf',
@@ -118,16 +113,20 @@ sub submit {
         2053 => 'stolen',
     );
 
+    $transaction = $result->transaction;
+    $result_code = $transaction->processor_response_code;
+
     $self->result_code($result_code);
+    $self->order_number($transaction->id);
 
     if ($result->is_success()) {
         $self->is_success(1);
-        $self->authorization($result->transaction->id);
+        $self->authorization($transaction->id);
     }
     else {
-	$self->is_success(0);
-    $self->failure_status($result_codes{$result_code}) if $result_codes{$result_code};
-	$self->error_message($result->message);
+        $self->is_success(0);
+        $self->error_message($result->message);
+        $self->failure_status($result_codes{$result_code}) if $result_codes{$result_code};
     }
 }
 
