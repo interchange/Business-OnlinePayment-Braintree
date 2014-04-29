@@ -250,6 +250,20 @@ Grant for the following enhancements (RT #88525):
 
 =back
 
+Peter Mottram for the following enhancements (GH #5):
+
+=over 4
+
+=item Failure status
+
+Set failure status from error codes provided by Braintree.
+
+=item CVV
+
+Pass cvv to Braintree.
+
+=back
+
 =head1 LICENSE AND COPYRIGHT
 
 Copyright 2011-2014 Stefan Hornburg (Racke).
