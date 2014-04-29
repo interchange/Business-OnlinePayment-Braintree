@@ -3,7 +3,7 @@ NAME
     Braintree
 
 VERSION
-    Version 0.004
+    Version 0.005
 
 SYNOPSIS
         use Business::OnlinePayment;
@@ -85,6 +85,13 @@ ACKNOWLEDGEMENTS
     order number transmission
     refund ability
     added submit_for_settlement to complete the "sale" action
+
+    Peter Mottram for the following enhancements (GH #5):
+
+    Failure status
+        Set failure status from error codes provided by Braintree.
+
+    CVV Pass cvv to Braintree.
 
 LICENSE AND COPYRIGHT
     Copyright 2011-2014 Stefan Hornburg (Racke).
