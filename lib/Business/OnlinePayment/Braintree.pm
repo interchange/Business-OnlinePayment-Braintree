@@ -114,10 +114,13 @@ sub submit {
     );
 
     $transaction = $result->transaction;
-    $result_code = $transaction->processor_response_code;
 
-    $self->result_code($result_code);
-    $self->order_number($transaction->id);
+    if ( $transaction ) {
+        $result_code = $transaction->processor_response_code;
+
+        $self->result_code($result_code);
+        $self->order_number($transaction->id);
+    }
 
     if ($result->is_success()) {
         $self->is_success(1);
@@ -126,7 +129,8 @@ sub submit {
     else {
         $self->is_success(0);
         $self->error_message($result->message);
-        $self->failure_status($result_codes{$result_code}) if $result_codes{$result_code};
+        $self->failure_status($result_codes{$result_code})
+          if ( $result_code && $result_codes{$result_code} );
     }
 }
 
