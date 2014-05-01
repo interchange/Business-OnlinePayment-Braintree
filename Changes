@@ -1,5 +1,12 @@
 Revision history for Business::OnlinePayment::Braintree
 
+0.006 Thu May  1 07:25:24 2014 CEST
+
+    [BUG FIXES]
+
+    * Cope with failures that do not return transaction method
+      (GH #6, Peter Mottram).
+
 0.005 Tue Apr 29 08:59:14 2014 CEST
 
     [ENHANCEMENTS]
