@@ -87,6 +87,9 @@ sub submit {
     elsif ($action eq 'authorization only') {
         $result = $self->sale(0);
     }
+    elsif ($action eq 'post authorization') {
+        $result = Net::Braintree::Transaction->submit_for_settlement($content{order_number}, $content{amount});
+    }
     elsif ($action eq 'credit' ) {
         $result = Net::Braintree::Transaction->refund($content{order_number}, $content{amount});
     }
