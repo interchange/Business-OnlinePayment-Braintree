@@ -271,6 +271,10 @@ Pass cvv to Braintree.
 
 =back
 
+Evan Brown (GH #7):
+
+Add support for post authorization action.
+
 =head1 LICENSE AND COPYRIGHT
 
 Copyright 2011-2014 Stefan Hornburg (Racke).
