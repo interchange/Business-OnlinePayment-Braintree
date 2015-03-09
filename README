@@ -3,7 +3,7 @@ NAME
     Braintree
 
 VERSION
-    Version 0.006
+    Version 0.010
 
 SYNOPSIS
         use Business::OnlinePayment;
@@ -92,6 +92,10 @@ ACKNOWLEDGEMENTS
         Set failure status from error codes provided by Braintree.
 
     CVV Pass cvv to Braintree.
+
+    Evan Brown (GH #7):
+
+    Add support for post authorization action.
 
 LICENSE AND COPYRIGHT
     Copyright 2011-2014 Stefan Hornburg (Racke).
