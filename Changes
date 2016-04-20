@@ -1,5 +1,12 @@
 Revision history for Business::OnlinePayment::Braintree
 
+0.020 Wed Apr 20 15:06:12 2016 CEST
+
+    [ENHANCEMENTS]
+
+    * Add support for the void action and the card_token transaction
+      result method (GH #8, Evan Brown).
+
 0.010 Mon Mar  9 09:19:07 2015 CET
 
     [ENHANCEMENTS]
