@@ -277,9 +277,10 @@ Pass cvv to Braintree.
 
 =back
 
-Evan Brown (GH #7):
+Evan Brown (GH #7, #8):
 
 Add support for post authorization action.
+Add support for the void action and the card_token transaction result method.
 
 =head1 LICENSE AND COPYRIGHT
 
