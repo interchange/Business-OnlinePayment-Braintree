@@ -93,6 +93,9 @@ sub submit {
     elsif ($action eq 'credit' ) {
         $result = Net::Braintree::Transaction->refund($content{order_number}, $content{amount});
     }
+    elsif ($action eq 'void' ) {
+        $result = Net::Braintree::Transaction->void($content{order_number});
+    }
     else {
         $self->error_message( "unsupported action for Braintree: $content{action}" );
         return 0;
@@ -128,6 +131,7 @@ sub submit {
     if ($result->is_success()) {
         $self->is_success(1);
         $self->authorization($transaction->id);
+        $self->card_token($transaction->id);
     }
     else {
         $self->is_success(0);
@@ -195,6 +199,8 @@ Sets defaults for the Braintree merchant id, public and private key.
 sub set_defaults {
     my ($self, %opts) = @_;
     my $config = Net::Braintree->configuration;
+
+    $self->build_subs(qw(card_token));
 
     $config->merchant_id($opts{merchant_id});
     $config->public_key($opts{public_key});
